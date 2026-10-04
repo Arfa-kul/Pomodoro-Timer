@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ===== FONTS ===== */
+
+/* ===== BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  background: #0a1628;
+}
+
+/* Timer digits font */
+.font-timer {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ===== BUBBLE RISE ANIMATION ===== */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-20px) scale(1);
+    opacity: 0;
+  }
+}
+
+.bubble-rise {
+  animation: bubble-rise linear infinite;
+}
+
+/* ===== FISH ANIMATIONS ===== */
+
+/* Idle - gentle bob */
+@keyframes fish-idle-anim {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px) scaleX(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-6px) scaleX(1);
+  }
+}
+
+.fish-idle svg {
+  animation: fish-idle-anim 3s ease-in-out infinite;
+}
+
+/* Calm swim (focus) - side to side */
+@keyframes fish-swim-anim {
+  0% {
+    transform: translate(-80%, -50%) scaleX(1);
+  }
+  49% {
+    transform: translate(30%, -50%) scaleX(1);
+  }
+  50% {
+    transform: translate(30%, -50%) scaleX(-1);
+  }
+  99% {
+    transform: translate(-80%, -50%) scaleX(-1);
+  }
+  100% {
+    transform: translate(-80%, -50%) scaleX(1);
+  }
+}
+
+.fish-swim svg {
+  animation: fish-swim-anim 6s ease-in-out infinite;
+}
+
+/* Happy swim (break) - faster with vertical bounce */
+@keyframes fish-happy-anim {
+  0% {
+    transform: translate(-80%, -50%) scaleX(1) rotate(0deg);
+  }
+  15% {
+    transform: translate(-30%, -70%) scaleX(1) rotate(-15deg);
+  }
+  30% {
+    transform: translate(20%, -40%) scaleX(1) rotate(10deg);
+  }
+  49% {
+    transform: translate(30%, -50%) scaleX(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(30%, -50%) scaleX(-1) rotate(0deg);
+  }
+  65% {
+    transform: translate(0%, -70%) scaleX(-1) rotate(15deg);
+  }
+  80% {
+    transform: translate(-40%, -30%) scaleX(-1) rotate(-10deg);
+  }
+  99% {
+    transform: translate(-80%, -50%) scaleX(-1) rotate(0deg);
+  }
+  100% {
+    transform: translate(-80%, -50%) scaleX(1) rotate(0deg);
+  }
+}
+
+.fish-happy svg {
+  animation: fish-happy-anim 3s ease-in-out infinite;
+}
+
+/* Fish mouth bubbles */
+@keyframes fish-bubble {
+  0% {
+    opacity: 0.6;
+    r: 1.5;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    r: 3;
+    transform: translate(5px, -15px);
+  }
+}
+
+.fish-bubble-1 {
+  animation: fish-bubble 1.5s ease-out infinite;
+}
+
+.fish-bubble-2 {
+  animation: fish-bubble 1.5s ease-out infinite 0.5s;
+}
+
+/* ===== WATER SURFACE ===== */
+@keyframes water-wave {
+  0%, 100% {
+    transform: translateX(-25%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+}
+
+.water-surface {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 50%
+  );
+  background-size: 200% 100%;
+  animation: water-wave 4s ease-in-out infinite;
+}
+
+/* ===== AQUARIUM FISH ENTRANCE ===== */
+@keyframes aquarium-fish-pop {
+  0% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.aquarium-fish-enter {
+  animation: aquarium-fish-pop 0.5s ease-out both;
+}
+
+/* ===== MODAL ANIMATION ===== */
+@keyframes modal-in {
+  0% {
+    transform: scale(0.95) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-modal-in {
+  animation: modal-in 0.25s ease-out;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .bubble-rise,
+  .fish-idle svg,
+  .fish-swim svg,
+  .fish-happy svg,
+  .fish-bubble-1,
+  .fish-bubble-2,
+  .water-surface,
+  .aquarium-fish-enter {
+    animation: none !important;
+  }
+
+  .fish-swim svg,
+  .fish-happy svg,
+  .fish-idle svg {
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
